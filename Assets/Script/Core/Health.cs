@@ -29,6 +29,7 @@ namespace Script.Core
             isDead = true;
             // ReSharper disable once Unity.PreferAddressByIdToGraphicsParams
             GetComponent<Animator>().SetTrigger("death");
+            GetComponent<ActionScheduler>().CancelAction();
         }
 
         public float GetHealth()

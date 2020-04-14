@@ -8,14 +8,17 @@ namespace Script.Movement
     {
         // ReSharper disable once InconsistentNaming
         private NavMeshAgent navMeshAgent;
+        private Health health;
 
         private void Start()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
+            health = GetComponent<Health>();
         }
 
         private void Update()
         {
+            if (health.IsDead()) navMeshAgent.enabled = false;
             UpdateAnimator();
         }
 

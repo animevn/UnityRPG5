@@ -1,5 +1,6 @@
 ﻿using System;
 using Script.Combat;
+using Script.Core;
 using UnityEngine;
 
 namespace Script.Controller
@@ -9,11 +10,14 @@ namespace Script.Controller
     {
         [SerializeField] private float chaseDistance = 10f;
         private Fighter fighter;
+        private Health health;
         private GameObject player;
+        
 
         private void Start()
         {
             fighter = GetComponent<Fighter>();
+            health = GetComponent<Health>();
             player = GameObject.FindWithTag("Player");
         }
 
@@ -24,11 +28,9 @@ namespace Script.Controller
 
         private void Update()
         {
-            if (InAttackRange() && fighter.CanAttack(player))
-            {
-                print("Start attact");
-                fighter.Attack(player);
-            }
+            if (health.IsDead()) return;
+            if (!InAttackRange() || !fighter.CanAttack(player)) return;
+            fighter.Attack(player);
         }
     }
 }

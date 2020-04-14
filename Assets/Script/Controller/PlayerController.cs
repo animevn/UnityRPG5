@@ -1,4 +1,6 @@
+using System;
 using Script.Combat;
+using Script.Core;
 using Script.Movement;
 using UnityEngine;
 
@@ -7,8 +9,16 @@ namespace Script.Controller
     
     public class PlayerController:MonoBehaviour
     {
+        private Health health;
+
+        private void Start()
+        {
+            health = GetComponent<Health>();
+        }
+
         private void Update()
         {
+            if (health.IsDead()) return;
             if (InteractWithCombat()) return;
             // ReSharper disable once RedundantJumpStatement
             if (InteractWithMovement()) return;
