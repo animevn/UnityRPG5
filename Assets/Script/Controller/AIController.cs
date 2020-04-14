@@ -11,12 +11,16 @@ namespace Script.Controller
     {
         [SerializeField] private float chaseDistance = 10f;
         [SerializeField] private float suspisionTime = 2f;
+        [SerializeField] private PatrolPath patrolPath;
+        [SerializeField] private float waypointTolerance = 1f;
+        
         private Fighter fighter;
         private Health health;
         private Mover mover;
         private GameObject player;
         private Vector3 guardPosition;
-        private float timeSinceLastSawPlayer;
+        private float timeSinceLastSawPlayer = Mathf.Infinity;
+        private int currentWayPointIndex = 0;
 
         private void Start()
         {
@@ -46,11 +50,43 @@ namespace Script.Controller
             }
             else
             {
-                fighter.Cancel();
-                mover.StartToMoveTo(guardPosition);
+                PatrolBehaviour();
             }
             timeSinceLastSawPlayer += Time.deltaTime;
         }
+
+        private void PatrolBehaviour()
+        {
+            Vector3 nextPostion = guardPosition;
+            if (patrolPath != null)
+            {
+                if (AtWayPoint())
+                {
+                    CycleWayPoint();
+                }
+
+                nextPostion = GetCurrentWaypoint();
+            }
+            
+            mover.StartToMoveTo(nextPostion);
+        }
+
+        private Vector3 GetCurrentWaypoint()
+        {
+            return patrolPath.GetWaypoint(currentWayPointIndex);
+        }
+
+        private void CycleWayPoint()
+        {
+            currentWayPointIndex = patrolPath.GetNextIndex(currentWayPointIndex);
+        }
+
+        private bool AtWayPoint()
+        {
+            var distance = Vector3.Distance(transform.position, GetCurrentWaypoint());
+            return distance < waypointTolerance;
+        }
+
 
         private void OnDrawGizmos()
         {
