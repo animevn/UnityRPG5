@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Script.Combat;
+using UnityEngine;
 
 namespace Script.Controller
 {
@@ -6,18 +8,26 @@ namespace Script.Controller
     public class AIController : MonoBehaviour
     {
         [SerializeField] private float chaseDistance = 10f;
+        private Fighter fighter;
+        private GameObject player;
 
-        private float DistanceToPlayer()
+        private void Start()
         {
-            var player = GameObject.FindWithTag("Player");
-            return Vector3.Distance(player.transform.position, transform.position);
+            fighter = GetComponent<Fighter>();
+            player = GameObject.FindWithTag("Player");
+        }
+
+        private bool InAttackRange()
+        {
+            return Vector3.Distance(player.transform.position, transform.position) < chaseDistance;
         }
 
         private void Update()
         {
-            if (DistanceToPlayer() < chaseDistance)
+            if (InAttackRange() && fighter.CanAttack(player))
             {
-                print("Should chase now");
+                print("Start attact");
+                fighter.Attack(player);
             }
         }
     }
