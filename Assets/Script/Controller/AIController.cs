@@ -13,6 +13,7 @@ namespace Script.Controller
         [SerializeField] private float suspisionTime = 2f;
         [SerializeField] private PatrolPath patrolPath;
         [SerializeField] private float waypointTolerance = 1f;
+        [SerializeField] float waypointDwellTime = 3f;
         
         private Fighter fighter;
         private Health health;
@@ -20,6 +21,7 @@ namespace Script.Controller
         private GameObject player;
         private Vector3 guardPosition;
         private float timeSinceLastSawPlayer = Mathf.Infinity;
+        float timeSinceArrivedAtWaypoint = Mathf.Infinity;
         private int currentWayPointIndex = 0;
 
         private void Start()
@@ -52,7 +54,13 @@ namespace Script.Controller
             {
                 PatrolBehaviour();
             }
+            UpdateTimer();
+        }
+
+        private void UpdateTimer()
+        {
             timeSinceLastSawPlayer += Time.deltaTime;
+            timeSinceArrivedAtWaypoint += Time.deltaTime;
         }
 
         private void PatrolBehaviour()
@@ -62,13 +70,18 @@ namespace Script.Controller
             {
                 if (AtWayPoint())
                 {
+                    timeSinceArrivedAtWaypoint = 0;
                     CycleWayPoint();
                 }
 
                 nextPostion = GetCurrentWaypoint();
             }
             
-            mover.StartToMoveTo(nextPostion);
+            if (timeSinceArrivedAtWaypoint > waypointDwellTime)
+            {
+                mover.StartToMoveTo(nextPostion);
+            }
+            
         }
 
         private Vector3 GetCurrentWaypoint()
