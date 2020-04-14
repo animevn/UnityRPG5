@@ -1,7 +1,8 @@
 ﻿﻿using System;
 using Script.Combat;
 using Script.Core;
-using UnityEngine;
+ using Script.Movement;
+ using UnityEngine;
 
 namespace Script.Controller
 {
@@ -12,13 +13,14 @@ namespace Script.Controller
         private Fighter fighter;
         private Health health;
         private GameObject player;
-        
+        private Vector3 guardPosition;
 
         private void Start()
         {
             fighter = GetComponent<Fighter>();
             health = GetComponent<Health>();
             player = GameObject.FindWithTag("Player");
+            guardPosition = transform.position;
         }
 
         private bool InAttackRange()
@@ -36,6 +38,7 @@ namespace Script.Controller
             else
             {
                 fighter.Cancel();
+                GetComponent<Mover>().StartToMoveTo(guardPosition);
             }
             
         }
