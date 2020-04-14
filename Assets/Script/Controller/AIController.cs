@@ -32,5 +32,11 @@ namespace Script.Controller
             if (!InAttackRange() || !fighter.CanAttack(player)) return;
             fighter.Attack(player);
         }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(transform.position, chaseDistance);
+        }
     }
 }
