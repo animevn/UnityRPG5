@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Script.Combat
+namespace Script.Core
 {
     public class Health:MonoBehaviour
     {

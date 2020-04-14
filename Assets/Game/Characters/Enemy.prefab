@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce2c419fc4b4a6a863d593aea4f6c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 50
 --- !u!114 &7581399663695476986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,14 +128,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8298292846561783410, guid: 997001f90003ba1428b9d3baf3b252ad,
         type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Enemy1
       objectReference: {fileID: 0}
     - target: {fileID: 8298292846561783414, guid: 997001f90003ba1428b9d3baf3b252ad,
         type: 3}
@@ -192,28 +188,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2632090981145595313, guid: 997001f90003ba1428b9d3baf3b252ad,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2174959319893805899, guid: 997001f90003ba1428b9d3baf3b252ad,
         type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: m_Speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 732334443, guid: 997001f90003ba1428b9d3baf3b252ad, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6792637895466751436, guid: 997001f90003ba1428b9d3baf3b252ad,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 732334442, guid: 997001f90003ba1428b9d3baf3b252ad, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: healthPerHit
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 997001f90003ba1428b9d3baf3b252ad, type: 3}

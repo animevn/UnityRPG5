@@ -12,5 +12,10 @@ namespace Script.Core
             currentAction?.Cancel();
             currentAction = action;
         }
+
+        public void CancelAction()
+        {
+            StartAction(null);
+        }
     }
 }
