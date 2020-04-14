@@ -24,11 +24,15 @@ namespace Script.Controller
             {
                 var target = hit.transform.GetComponent<CombatTarget>();
                 if (target == null) continue;
-                if (Input.GetMouseButtonDown(0) && target.GetComponent<Health>().GetHealth() > 0)
+                
+                if (!GetComponent<Fighter>().CanAttack(target))
                 {
-                    transform.LookAt(target.transform);
+                    continue;
+                }
+
+                if (Input.GetMouseButtonDown(0))
+                {
                     GetComponent<Fighter>().Attack(target);
-                    Debug.DrawRay(ray.origin, ray.direction * 1000);
                 }
                 return true;
             }
