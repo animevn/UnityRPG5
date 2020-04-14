@@ -10,17 +10,23 @@ namespace Script.Combat
         [SerializeField] private float timeBetweenAttack = 1f;
         [SerializeField] private float healthPerHit = 10f;
         // ReSharper disable once InconsistentNaming
-        private Transform target;
+        private Health target;
         private float timeSinceLastAttack = 0;
+        
+        private bool GetIsInRange()
+        {
+            return Vector3.Distance(transform.position, target.transform.position) < weaponRange;
+        }
 
         private void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
             if (target == null) return;
-            var isInRange = Vector3.Distance(transform.position, target.position) > weaponRange;
-            if (isInRange)
+            if (target.IsDead()) return;
+        
+            if (!GetIsInRange())
             {
-                GetComponent<Mover>().MoveTo(target.position);
+                GetComponent<Mover>().MoveTo(target.transform.position);
             }
             else
             {
@@ -30,13 +36,19 @@ namespace Script.Combat
 
         }
 
-        private void AttackBehavior()
+        private void TriggerAttack()
         {
-            if (!(timeSinceLastAttack > timeBetweenAttack)) return;
             // ReSharper disable once Unity.PreferAddressByIdToGraphicsParams
             GetComponent<Animator>().ResetTrigger("stopAttack");
             // ReSharper disable once Unity.PreferAddressByIdToGraphicsParams
             GetComponent<Animator>().SetTrigger("attack");
+        }
+
+        private void AttackBehavior()
+        {
+            transform.LookAt(target.transform);
+            if (!(timeSinceLastAttack > timeBetweenAttack)) return;
+            TriggerAttack();
             timeSinceLastAttack = 0;
         }
         
@@ -54,7 +66,7 @@ namespace Script.Combat
         public void Attack(CombatTarget combatTarget)
         {
             GetComponent<ActionScheduler>().StartAction(this);
-            target = combatTarget.transform;
+            target = combatTarget.GetComponent<Health>();
         }
 
         public void Cancel()
