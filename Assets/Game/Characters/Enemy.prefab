@@ -26,18 +26,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681d99c045664c3b8d1ce7af85fe67bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5549479813240805112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4514294994087414845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 681d99c045664c3b8d1ce7af85fe67bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6911718827149119704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27cbdc3d7fdf16e47976be62f42dac94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseDistance: 10
+  chaseDistance: 5
 --- !u!1001 &1379131624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -128,11 +116,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8298292846561783410, guid: 997001f90003ba1428b9d3baf3b252ad,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemy1
-      objectReference: {fileID: 0}
     - target: {fileID: 8298292846561783414, guid: 997001f90003ba1428b9d3baf3b252ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -188,18 +171,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8298292846561783410, guid: 997001f90003ba1428b9d3baf3b252ad,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 2174959319893805899, guid: 997001f90003ba1428b9d3baf3b252ad,
         type: 3}
       propertyPath: m_Speed
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 732334443, guid: 997001f90003ba1428b9d3baf3b252ad, type: 3}
-      propertyPath: weaponRange
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 732334443, guid: 997001f90003ba1428b9d3baf3b252ad, type: 3}
       propertyPath: healthPerHit
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 732334443, guid: 997001f90003ba1428b9d3baf3b252ad, type: 3}
+      propertyPath: weaponRange
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 997001f90003ba1428b9d3baf3b252ad, type: 3}

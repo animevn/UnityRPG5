@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using Script.Combat;
 using Script.Core;
 using UnityEngine;
@@ -29,8 +29,15 @@ namespace Script.Controller
         private void Update()
         {
             if (health.IsDead()) return;
-            if (!InAttackRange() || !fighter.CanAttack(player)) return;
-            fighter.Attack(player);
+            if (InAttackRange() && fighter.CanAttack(player))
+            {
+                fighter.Attack(player);
+            }
+            else
+            {
+                fighter.Cancel();
+            }
+            
         }
 
         private void OnDrawGizmos()
