@@ -12,8 +12,21 @@ namespace Script.Controller
             for (int i = 0; i < transform.childCount; i++)
             {
                 Gizmos.color = Color.red;
-                Gizmos.DrawSphere(transform.GetChild(i).position, waypointRadius);  
+                Gizmos.DrawSphere(GetWaypoint(i), waypointRadius);
+                if (i < transform.childCount - 1)
+                {
+                    Gizmos.DrawLine(GetWaypoint(i), GetWaypoint(i + 1));
+                }
+                else
+                {
+                    Gizmos.DrawLine(GetWaypoint(i), GetWaypoint(0));
+                }
             }
+        }
+
+        private Vector3 GetWaypoint(int i)
+        {
+            return transform.GetChild(i).position;
         }
     }
 }
